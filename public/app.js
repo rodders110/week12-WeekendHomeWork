@@ -10,7 +10,7 @@ var makeRequest = function(url, callback){
 var requestComplete = function(){
   console.log('restComplete');
   if(this.status !==200){
-    console.log("Error with API request: ${url}");
+    console.log(`No content found`);
     return
   }
   const parser = new DOMParser();
@@ -31,17 +31,28 @@ var populateBookList = function(doc){
   var list = doc.querySelectorAll('title');
   for(let item of list){
     let aTag = document.createElement('p');
-    let bTag = document.createElement('p');
+    let cTag = document.createElement('p');
+    let imgTag = document.createElement('img');
     console.log(item);
-    aTag.innerHTML = item.querySelector('titleshort').innerHTML;
+    aTag.className = 'heading';
+    aTag.innerHTML = item.querySelector('titleshort').innerHTML + " - " + item.querySelector('authorweb').innerHTML ;
     mainTag.appendChild(aTag);
-    let str = _.unescape(item.querySelector('flapcopy').innerHTML);
-    let str2 = str.replace(/<[^>]*>?/gm, ' ');
-    str2 = str2.replace(/&#8217;/gm, '\'');
-    str2 = str2.replace(/&#160;/gm, '\'');
-    bTag.innerText = str2;
-    aTag.appendChild(bTag);
+    let str = item.querySelector('flapcopy').innerHTML;
+    str2 = _.unescape(str);
+    cTag.innerHTML = str2;
+    mainTag.appendChild(cTag);
+    let urlStr = 'https://reststop.randomhouse.com/resources/titles/' + item.querySelector('isbn').innerHTML;
+    imgTag.src = urlStr;
+    mainTag.appendChild(imgTag);
+    imgTag.addEventListener('click', function(){
+      populateBookInfo(item);
+    });
+    
   }
+}
+
+var populateBookInfo = function(book){
+  let url = 'https://reststop.randomhouse.com/resources/';
 }
 
 

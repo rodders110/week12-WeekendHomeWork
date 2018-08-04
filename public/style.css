@@ -1,0 +1,36 @@
+body{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: purple;
+    animation: backplain 10s infinite;
+    background-image: url('book.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    height: 100wh;
+    
+}
+
+@keyframes backplain {
+    0%   {background-color: purple;}
+    25%  {background-color: blueviolet}
+    50%  {background-color: violet;}
+    100% {background-color: palevioletred;}
+}
+
+h1{
+    text-align: center;
+}
+
+label{
+    text-align: center;
+}
+
+img:hover{
+    transform: scale(1.3); 
+}
+
+.heading{
+    font-size: 30px;
+}
