@@ -3,7 +3,7 @@ body{
     flex-direction: column;
     color: white;
     background-color: purple;
-    animation: backplain 10s infinite;
+    animation: backplain 26s infinite;
     background-image: url('book.png');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -31,6 +31,10 @@ label{
 
 img:hover{
     transform: scale(1.3); 
+}
+
+p.author:hover{
+    color: black; 
 }
 
 .heading{

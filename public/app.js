@@ -33,12 +33,15 @@ var populateBookList = function(doc){
     let aTag = document.createElement('p');
     let bTag = document.createElement('p');
     let cTag = document.createElement('p');
-    let review = document.createElement('p');
     let imgTag = document.createElement('img');
+    let author = document.createElement('p');
+    author.className = 'author';
     console.log(item);
     aTag.className = 'heading';
-    aTag.innerHTML = item.querySelector('titleshort').innerHTML + " - " + item.querySelector('authorweb').innerHTML ;
+    author.innerHTML = item.querySelector('authorweb').innerHTML;
+    aTag.innerHTML = item.querySelector('titleshort').innerHTML;
     mainTag.appendChild(aTag);
+    aTag.appendChild(author);
     let str = item.querySelector('flapcopy').innerHTML;
     str2 = _.unescape(str);
     cTag.innerHTML = str2;
@@ -48,21 +51,32 @@ var populateBookList = function(doc){
     mainTag.appendChild(imgTag);
     imgTag.addEventListener('click', function(){
       populateBookInfo(item);
+    }); 
+    author.addEventListener('click', function(){ 
+      populateAuthorInfo(item);
     });
-    bTag.innerText = 'Reviews:';
-    mainTag.appendChild(bTag);
-    review.innerHTML = _.unescape(item.querySelector('jacketquotes').innerHTML);
-    mainTag.appendChild(review);
-
-    
   }
 }
 
 var populateBookInfo = function(book){
   let mainTag = document.getElementById('main');
   clearContent(mainTag);
+  let title = document.createElement('h1');
+  title.innerText = `Excerpt from ${book.querySelector('titleshort').innerHTML}`;
+  mainTag.appendChild(title);
   let example = document.createElement('p');
   example.innerHTML = _.unescape(book.querySelector('excerpt').innerHTML);
+  mainTag.appendChild(example);
+}
+
+var populateAuthorInfo = function(book){
+  let mainTag = document.getElementById('main');
+  clearContent(mainTag);
+  let title = document.createElement('h1');
+  title.innerText = `About ${book.querySelector('authorweb').innerHTML}`;
+  mainTag.appendChild(title);
+  let example = document.createElement('p');
+  example.innerHTML = _.unescape(book.querySelector('authorbio').innerHTML);
   mainTag.appendChild(example);
 }
 
