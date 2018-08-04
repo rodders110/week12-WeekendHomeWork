@@ -31,7 +31,9 @@ var populateBookList = function(doc){
   var list = doc.querySelectorAll('title');
   for(let item of list){
     let aTag = document.createElement('p');
+    let bTag = document.createElement('p');
     let cTag = document.createElement('p');
+    let review = document.createElement('p');
     let imgTag = document.createElement('img');
     console.log(item);
     aTag.className = 'heading';
@@ -47,12 +49,21 @@ var populateBookList = function(doc){
     imgTag.addEventListener('click', function(){
       populateBookInfo(item);
     });
+    bTag.innerText = 'Reviews:';
+    mainTag.appendChild(bTag);
+    review.innerHTML = _.unescape(item.querySelector('jacketquotes').innerHTML);
+    mainTag.appendChild(review);
+
     
   }
 }
 
 var populateBookInfo = function(book){
-  let url = 'https://reststop.randomhouse.com/resources/';
+  let mainTag = document.getElementById('main');
+  clearContent(mainTag);
+  let example = document.createElement('p');
+  example.innerHTML = _.unescape(book.querySelector('excerpt').innerHTML);
+  mainTag.appendChild(example);
 }
 
 
