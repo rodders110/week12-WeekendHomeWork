@@ -39,7 +39,7 @@ var populateBookList = function(doc){
     console.log(item);
     aTag.className = 'heading';
     author.innerHTML = item.querySelector('authorweb').innerHTML;
-    aTag.innerHTML = item.querySelector('titleshort').innerHTML;
+    aTag.innerHTML = item.querySelector('titleweb').innerHTML;
     mainTag.appendChild(aTag);
     aTag.appendChild(author);
     let str = item.querySelector('flapcopy').innerHTML;
@@ -62,7 +62,7 @@ var populateBookInfo = function(book){
   let mainTag = document.getElementById('main');
   clearContent(mainTag);
   let title = document.createElement('h1');
-  title.innerText = `Excerpt from ${book.querySelector('titleshort').innerHTML}`;
+  title.innerText = `Excerpt from ${book.querySelector('titleweb').innerHTML}`;
   mainTag.appendChild(title);
   let example = document.createElement('p');
   example.innerHTML = _.unescape(book.querySelector('excerpt').innerHTML);
@@ -78,6 +78,15 @@ var populateAuthorInfo = function(book){
   let example = document.createElement('p');
   example.innerHTML = _.unescape(book.querySelector('authorbio').innerHTML);
   mainTag.appendChild(example);
+  let ref = document.createElement('p');
+  ref.innerHTML = 'Click here for more books by this author';
+  ref.className = 'author';
+  mainTag.appendChild(ref);
+  let url = `https://reststop.randomhouse.com/resources/titles?authorid=${book.querySelector('authors').lastChild.innerHTML}`;
+  ref.addEventListener('click', function(){
+    makeRequest(url, requestComplete)
+  })
+  
 }
 
 
