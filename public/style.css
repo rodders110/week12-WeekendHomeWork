@@ -8,6 +8,7 @@ body{
     background-size: 100%;
     background-repeat: no-repeat;
     background-position-x: 50%;
+    background-attachment: fixed;
     height: 100wh;
     
 }
@@ -40,3 +41,4 @@ p.author:hover{
 .heading{
     font-size: 30px;
 }
+
